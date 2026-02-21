@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Layali Aliraq - Authentic Iraqi Cuisine</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet"/>
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet"/>
+
+    <!-- link css -->
+    <link rel="stylesheet" href="./css/main.css">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#c8a328",
+                        "primary-dark": "#b08d1f",
+                        "background-light": "#f8f7f6",
+                        "background-dark": "#111111",
+                        "surface-dark": "#1a1a1a",
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans", "sans-serif"]
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fade-in 1s ease-out forwards;
+        }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 3s ease-in-out infinite;
+        }
+        
+        /* Smooth slide animation */
+        .slide-image {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.4s ease-in-out;
+        }
+        
+        .slide-image.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-image.exit {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+        /* --------- */
+        .scrollbar-hide::-webkit-scrollbar{ 
+            display: none; 
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+        }
+        .custom-scrollbar::-webkit-scrollbar { 
+            height: 4px; 
+        }
+        .custom-scrollbar::-webkit-scrollbar-track { 
+            background: #1a1a1a; 
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb { 
+            background: #c8a328; 
+            border-radius: 2px; 
+        }
+        .menu-item { 
+            animation: slideUp 0.4s ease-out forwards; 
+        }
+        .cart-badge { 
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; 
+        }
+        #mobile-menu{
+            text-align: center;
+        }
+        #mobile-menu a:hover{
+            background-color: #c8a328;
+            color: #000000;
+            font-weight: 700;
+            transition: all 1s ease-in-out;
+        }
+        #darkTEXT{
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;  
+            justify-content: center;
+            align-items: center;
+        }
+
+        #textTitle{
+            width: 100%;
+            text-align: center;
+            font-size: clamp(2.5rem, 5vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+        
+        }
+        #chafIMG img{
+            object-fit: cover;
+            
+        }  
+        #chafIMG img:hover{
+            transform:translateY(-10px);
+            transition: all .3s ease-in;
+            cursor: pointer;
+            border: 2px solid #c8a328;
+        }    
+        .reveal-text {
+            font-size: 1.4rem;
+            line-height: 2;
+            color: #d1d5db;
+            font-weight: 400;
+        }
+
+        .gold {
+          color: #c8a328;
+          font-weight: 600;
+        }
+
+        .line {
+          overflow: hidden;
+          display: block;
+        }
+
+        .char {
+          display: inline-block;
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        .image {
+            transform: scale(1);
+            transition: transform 0.7s ease;
+        }
+
+        .image-container {
+          overflow: hidden;
+          border-radius: 1rem;
+        }
+        #logo img{
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#111111]/90 backdrop-blur-md border-b border-[#333]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-background-dark">
+                        <span class="material-symbols-outlined"><img src="./images/logo (3).png" alt=""></span>
+                    </div>
+                    <h1 class="text-white text-xl font-bold tracking-tight uppercase">Layali Aliraq</h1>
+                </div>
+                
+                <nav class="hidden md:flex items-center gap-8">
+                    <a class="text-sm font-medium text-gray-300 hover:text-primary transition-colors" href="#home">Home</a>
+                    <a class="text-sm font-medium text-gray-300 hover:text-primary transition-colors" href="#about">About</a>
+                    <a class="text-sm font-medium text-gray-300 hover:text-primary transition-colors" href="#menu">Menu</a>
+                    <a class="text-sm font-medium text-gray-300 hover:text-primary transition-colors" href="#gallery">Gallery</a>
+                    <a class="text-sm font-medium text-gray-300 hover:text-primary transition-colors" href="#location">Contact</a>
+                </nav>
+
+                <div class="flex items-center gap-4">
+                    <!-- Cart Button -->
+                    <button onclick="toggleCart()" class="relative bg-surface-dark hover:bg-[#333] text-white p-2.5 rounded-lg transition-colors border border-[#333]">
+                        <span class="material-symbols-outlined">shopping_cart</span>
+                        <span id="cart-count" class="cart-badge absolute -top-2 -right-2 bg-primary text-background-dark text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
+                    </button>
+                    
+                    <a class="hidden md:flex bg-primary hover:bg-primary-dark text-background-dark px-6 py-2.5 rounded-lg text-sm font-bold transition-all shadow-[0_0_15px_rgba(200,163,40,0.3)]" href="#menu">
+                        Order Now
+                    </a>
+                    <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                        <span class="material-symbols-outlined text-3xl">menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#111111] border-t border-[#333]">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#home" class="block text-gray-300 hover:text-primary py-2">Home</a>
+                <a href="#about" class="block text-gray-300 hover:text-primary py-2">About</a>
+                <a href="#menu" class="block text-gray-300 hover:text-primary py-2">Menu</a>
+                <a href="#gallery" class="block text-gray-300 hover:text-primary py-2">Gallery</a>
+                <a href="#location" class="block text-gray-300 hover:text-primary py-2">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleCart()"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-[#111111] border-l border-[#333] shadow-2xl transform transition-transform duration-300 translate-x-full" id="cart-panel">
+            <div class="flex flex-col h-full">
+                <div class="p-6 border-b border-[#333] flex items-center justify-between">
+                    <h3 class="text-white text-xl font-bold flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">shopping_bag</span>
+                        Your Order
+                    </h3>
+                    <button onclick="toggleCart()" class="text-gray-400 hover:text-white">
+                        <span class="material-symbols-outlined text-2xl">close</span>
+                    </button>
+                </div>
+                
+                <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+                    <p class="text-gray-500 text-center py-8">Your cart is empty</p>
+                </div>
+                
+                <div class="p-6 border-t border-[#333] bg-surface-dark">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-gray-400">Subtotal</span>
+                        <span id="cart-total" class="text-white font-bold text-xl">SAR 0</span>
+                    </div>
+                    <button onclick="checkoutWhatsApp()" class="w-full bg-primary hover:bg-primary-dark text-background-dark font-bold py-3.5 rounded-lg transition-all shadow-lg flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined">chat</span>
+                        Order via WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen min-h-[600px] w-full flex items-center justify-center overflow-hidden" id="home">
+        
+        <!-- Container for sliding images -->
+        <div id="slider-container" class="absolute inset-0 z-0">
+            <!-- Images will be inserted here by JavaScript -->
+        </div>
+        
+        <!-- Dark overlay -->
+        <div class="absolute inset-0 z-[1] bg-gradient-to-b from-black/70 via-black/50 to-[#111111] pointer-events-none"></div>
+
+        <div class="relative z-10 container mx-auto px-4 h-full flex items-center justify-center">
+            <div id="darkTEXT" class="animate-fade-in flex flex-col items-center justify-center gap-6 max-w-5xl mx-auto text-center w-full">
+                
+                <span class="text-primary font-bold tracking-[0.2em] uppercase text-sm md:text-base animate-pulse-slow">
+                    Experience Tradition
+                </span>
+        
+                <h1 id="textTitle" class="text-white tracking-tight text-center">
+                    Authentic Iraqi Taste in the 
+                    <span class="textColor">
+                        Heart of Jeddah
+                    </span>
+                </h1>
+        
+                <p class="text-gray-200 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed text-center">
+                    Experience the rich culinary heritage of Iraq, grilled to perfection over charcoal and served with warmth.
+                </p>
+        
+                <div class="flex flex-col sm:flex-row gap-4 mt-8 w-full justify-center items-center">
+                    <a class="bg-primary hover:bg-primary-dark text-background-dark font-bold py-3.5 px-8 rounded-lg transition-all transform hover:scale-105 shadow-[0_4px_20px_rgba(200,163,40,0.4)] flex items-center justify-center gap-2" href="#menu">
+                        <span class="material-symbols-outlined text-[20px]">restaurant</span>
+                        View Menu
+                    </a>
+        
+                    <button onclick="scrollToSection('location')" class="bg-transparent border border-white hover:border-primary hover:text-primary text-white font-bold py-3.5 px-8 rounded-lg transition-all flex items-center justify-center gap-2 backdrop-blur-sm">
+                        <span class="material-symbols-outlined text-[20px]">location_on</span>
+                        Find Us
+                    </button>
+                </div>
+        
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-24 bg-[#111111] relative overflow-hidden" id="about">
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/5 to-transparent pointer-events-none"></div>
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="relative group">
+                    <div class="absolute -inset-2 bg-primary/20 rounded-2xl blur-lg opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl border border-white/10 image-container">
+                      <img alt="Chef plating food" class="object-cover w-full h-full image" src="./images/chafAbout.jpeg"/>
+                    </div>
+                  </div>
+                <div class="space-y-8">
+                    <div>
+                        <h2 class="text-primary font-bold text-lg uppercase tracking-wider mb-2">Our Story</h2>
+                        <h3 class="text-white text-4xl md:text-5xl font-bold leading-tight">Heritage of Samad Al-Iraqi</h3>
+                    </div>
+                    <div class="w-20 h-1 bg-primary rounded-full"></div>
+                    <p class="reveal-text">
+                        Inspired by the legendary hospitality of 
+                        <span class="gold">Samad Al-Iraqi</span>, Layali Aliraq is more than a restaurant; 
+                        it is a cultural embassy of flavor.
+                      </p>
+                      
+                      <p class="reveal-text">
+                        From the clay ovens of 
+                        <span class="gold">Baghdad</span> 
+                        to the vibrant coast of 
+                        <span class="gold">Jeddah</span>.
+                      </p>
+                    <div class="pt-4">
+                        <div class="flex items-center gap-4">
+                            <div id="chafIMG" class="flex -space-x-4">
+                                <img alt="Chef" class="w-12 h-12 rounded-full border-2 border-[#111111]" src="./images/chaf1.jpeg"/>
+                                <img alt="Chef" class="w-12 h-12 rounded-full border-2 border-[#111111]" src="./images/chaf2.jpeg"/>
+                            </div>
+                            <span class="text-white font-medium">Master Chefs from Iraq</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="py-24 bg-[#111111]" id="menu">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <div class="text-center mb-12">
+                <h2 class="text-primary font-bold text-lg uppercase tracking-wider mb-3">Our Complete Menu</h2>
+                <h3 class="text-white text-4xl font-bold">A Culinary Journey Through Iraq</h3>
+                <p class="text-gray-400 mt-4 max-w-2xl mx-auto">Click on any category to explore our authentic dishes</p>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="sticky top-20 z-40 bg-[#111111]/95 backdrop-blur shadow-md py-4 mb-12 -mx-4 px-4 border-b border-[#333]">
+                <div class="flex overflow-x-auto custom-scrollbar gap-2 md:gap-3 pb-2" id="category-buttons">
+                    <!-- Categories injected by JS -->
+                </div>
+            </div>
+
+            <!-- Menu Grid -->
+            <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+                <!-- Menu items injected by JS -->
+            </div>
+
+            <div class="mt-12 text-center">
+                <button onclick="downloadMenu()" class="inline-flex items-center gap-2 text-white hover:text-primary transition-colors font-semibold border-b border-transparent hover:border-primary pb-1">
+                    Download PDF Menu <span class="material-symbols-outlined text-lg">download</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-24 bg-[#111111] relative" id="gallery">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <h2 class="text-primary font-bold text-lg uppercase tracking-wider mb-2">Gallery</h2>
+                    <h3 class="text-white text-4xl font-bold">Atmosphere & Delights</h3>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[200px]">
+                <div class="md:col-span-2 md:row-span-2 rounded-xl overflow-hidden relative group cursor-pointer">
+                    <img alt="Restaurant" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="./images/photoRE.avif"/>
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                    </div>
+                </div>
+                <div class="md:col-span-1 md:row-span-2 rounded-xl overflow-hidden relative group cursor-pointer">
+                    <img alt="Tea" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="./images/photoCAFF.avif"/>
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                    </div>
+                </div>
+                <div class="rounded-xl overflow-hidden relative group cursor-pointer">
+                    <img alt="Food" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="./images/photoFOOD1.avif"/>
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                    </div>
+                </div>
+                <div class="rounded-xl overflow-hidden relative group cursor-pointer">
+                    <img alt="Grill" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" src="./images/photoFOOD2.avif"/>
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100">
+                        <span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="py-0 grid grid-cols-1 lg:grid-cols-2 bg-[#111111]" id="location">
+        <div class="min-h-[500px] w-full bg-gray-800 relative">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3710.6385!2d39.1925!3d21.5433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjHCsDMyJzM1LjkiTiAzOcKwMTEnMzMuMCJF!5e0!3m2!1sen!2ssa!4v1234567890"
+                width="100%" 
+                height="100%" 
+                style="border:0; filter: grayscale(100%) invert(92%) contrast(83%);" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                class="absolute inset-0">
+            </iframe>
+            <div class="absolute bottom-4 left-4 right-4 md:right-auto bg-[#111111] p-5 rounded-lg shadow-xl border border-[#333] max-w-sm">
+                <h5 class="text-white font-bold text-base mb-1">Layali Aliraq Restaurant</h5>
+                <p class="text-gray-400 text-sm mb-2">Prince Sultan Rd, Al Rawdah Dist, Jeddah</p>
+                <a href="https://maps.app.goo.gl/9CNXsoPtQZhiEhUH6">
+                    Get Directions <span class="material-symbols-outlined text-sm">arrow_outward</span>
+                </a>
+            </div>
+        </div>
+        <div class="p-8 md:p-12 lg:p-20 flex flex-col justify-center bg-surface-dark border-l border-[#333]">
+            <h2 class="text-primary font-bold text-lg uppercase tracking-wider mb-2">Visit Us</h2>
+            <h3 class="text-white text-4xl font-bold mb-8">Contact & Reservations</h3>
+            <div class="space-y-8 mb-10">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-full bg-[#111111] border border-[#333] flex items-center justify-center shrink-0 text-primary">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold mb-1 text-lg">Opening Hours</h4>
+                        <p class="text-gray-400">Daily: 12:00 PM - 1:00 AM<br/>Friday: 1:00 PM - 2:00 AM</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-full bg-[#111111] border border-[#333] flex items-center justify-center shrink-0 text-primary">
+                        <span class="material-symbols-outlined">call</span>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold mb-1 text-lg">Contact</h4>
+                        <p class="text-gray-400">+966 12 345 6789<br/>info@layalialiraq.com</p>
+                    </div>
+                </div>
+            </div>
+            <form id="whatsappForm" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input id="name"
+                        class="w-full bg-[#111111] border border-[#333] rounded-lg p-3 text-white placeholder-gray-500 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                        placeholder="Your Name" type="text" required/>
+            
+                    <input id="phone"
+                        class="w-full bg-[#111111] border border-[#333] rounded-lg p-3 text-white placeholder-gray-500 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                        placeholder="Phone Number" type="tel" required/>
+                </div>
+            
+                <textarea id="message"
+                    class="w-full bg-[#111111] border border-[#333] rounded-lg p-3 text-white placeholder-gray-500 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="Message or Reservation Request"
+                    rows="3" required></textarea>
+            
+                <button type="submit"
+                    class="w-full bg-primary hover:bg-primary-dark text-background-dark font-bold py-3.5 rounded-lg transition-all shadow-lg hover:shadow-primary/20">
+                    Send via WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-12 border-t border-[#333]">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <span id="logo" class="material-symbols-outlined text-primary"><img src="./images/logo (3).png" alt=""></span>
+                    <span class="font-bold text-xl uppercase tracking-wider">Layali Aliraq</span>
+                </div>
+                <div class="flex gap-6">
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 014.121 3.36c.636-.247 1.363-.416 2.427-.465C7.502 2.088 7.86 2 10.182 2h2.133z"/></svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/></svg>
+                    </a>
+                </div>
+                <p class="text-gray-500 text-sm">© 2026 Layali Aliraq. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float -->
+    <a class="fixed bottom-8 right-8 z-40 bg-primary hover:bg-primary-dark text-background-dark p-4 rounded-full shadow-[0_4px_20px_rgba(200,163,40,0.5)] hover:scale-110 transition-transform flex items-center justify-center group" href="https://wa.me/212608173585" target="_blank">
+        <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        <span class="absolute right-full mr-3 bg-yellow-500 text-black px-3 py-1 rounded text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-lg">Order via WhatsApp</span>
+    </a>
+    <!-- script GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+
+    <script src="./js/app.js"></script>
+    <!-- I'm a website developer called simo-SM -->
+</body>
+</html>

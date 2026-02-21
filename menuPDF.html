@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu PDF Generator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1a1a;
+            color: #333;
+        }
+
+        /* Preview Container */
+        #menu-preview {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+
+        /* PDF Styles */
+        .pdf-menu {
+            font-family: 'Inter', sans-serif;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .pdf-header {
+            text-align: center;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #c8a328;
+            margin-bottom: 40px;
+        }
+
+        .pdf-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 48px;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .pdf-header .subtitle {
+            font-size: 16px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .pdf-category {
+            margin-bottom: 35px;
+            page-break-inside: avoid;
+        }
+
+        .pdf-category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #c8a328;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pdf-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 18px;
+            padding-bottom: 15px;
+            border-bottom: 1px dotted #ddd;
+        }
+
+        .pdf-item:last-child {
+            border-bottom: none;
+        }
+
+        .pdf-item-info {
+            flex: 1;
+        }
+
+        .pdf-item-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bestseller-badge {
+            background: #c8a328;
+            color: white;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pdf-item-description {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .pdf-item-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #c8a328;
+            white-space: nowrap;
+            margin-left: 20px;
+        }
+
+        .pdf-footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #c8a328;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Control Buttons */
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-download {
+            background: #c8a328;
+            color: #1a1a1a;
+        }
+
+        .btn-download:hover {
+            background: #d4b43a;
+            transform: translateY(-2px);
+        }
+
+        .btn-print {
+            background: #333;
+            color: white;
+        }
+
+        .btn-print:hover {
+            background: #444;
+        }
+
+        /* Print Styles */
+        @media print {
+            .controls {
+                display: none;
+            }
+            #menu-preview {
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Control Buttons -->
+    <div class="controls">
+        <button class="btn btn-download" onclick="generatePDF()">
+            <span>⬇</span> Download PDF
+        </button>
+        <button class="btn btn-print" onclick="window.print()">
+            <span>🖨</span> Print
+        </button>
+    </div>
+
+    <!-- PDF Content -->
+    <div id="menu-preview">
+        <div id="pdf-content" class="pdf-menu">
+            <!-- Content will be generated by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Your Menu Data
+        const menuData = {
+            categories: [
+                {
+                    id: "cold-appetizers",
+                    name: "Cold Appetizers",
+                    items: [
+                        {name: "Hummus", price: 25, description: "Creamy chickpea dip with tahini, lemon, and olive oil", image: "/images/image_1.jpg", bestseller: false},
+                        {name: "Hummus Bil Lahme", price: 35, description: "Hummus topped with sautéed meat and pine nuts", image: "/images/image_2.jpg", bestseller: true},
+                        {name: "Mutabbal", price: 25, description: "Smoky eggplant dip with tahini and garlic", image: "/images/Mutabbal.jpeg", bestseller: false},
+                        {name: "Baba Ghanoush", price: 25, description: "Grilled eggplant with tomatoes, onions, and herbs", image: "/images/image_4.jpg", bestseller: false},
+                        {name: "Labneh", price: 20, description: "Strained yogurt with olive oil and za'atar", image: "/images/image_5.jpg", bestseller: false},
+                        {name: "Fattoush", price: 30, description: "Levantine salad with fried bread, sumac, and pomegranate", image: "/images/image_6.jpg", bestseller: false},
+                    ]
+                },
+                {
+                    id: "salads",
+                    name: "Salads",
+                    items: [
+                        {name: "Iraqi Salad", price: 20, description: "Fresh vegetables with special Iraqi dressing", image: "/images/image_7.jpg", bestseller: false},
+                        {name: "Tabbouleh", price: 25, description: "Parsley, bulgur, tomatoes, and mint salad", image: "/images/image_8.jpg", bestseller: false},
+                        {name: "Greek Salad", price: 30, description: "Cucumber, tomatoes, feta cheese, and olives", image: "/images/image_9.jpg", bestseller: false},
+                    ]
+                },
+                {
+                    id: "soups",
+                    name: "Soups",
+                    items: [
+                        {name: "Lentil Soup", price: 20, description: "Traditional Iraqi lentil soup with spices", image: "/images/image_10.jpg", bestseller: false},
+                        {name: "Chicken Soup", price: 25, description: "Hearty chicken soup with vegetables", image: "/images/image_11.jpg", bestseller: false},
+                    ]
+                },
+                {
+                    id: "manageesh",
+                    name: "Manageesh",
+                    items: [
+                        {name: "Za'atar", price: 15, description: "Flatbread with thyme, sesame, and olive oil", image: "/images/image_12.jpg", bestseller: false},
+                        {name: "Cheese", price: 20, description: "Flatbread with Akkawi cheese", image: "/images/image_13.jpg", bestseller: false},
+                        {name: "Meat", price: 25, description: "Flatbread with seasoned minced meat", image: "/images/image_14.jpg", bestseller: false},
+                    ]
+                },
+                {
+                    id: "iraqi-kibbeh",
+                    name: "Iraqi Kibbeh",
+                    items: [
+                        {name: "Mosul Kibbeh", price: 45, description: "Flat kibbeh stuffed with meat, onions, and almonds", image: "/images/image_15.jpg", bestseller: true},
+                        {name: "Baghdad Kibbeh", price: 40, description: "Round fried kibbeh with pine nuts", image: "/images/image_16.jpg", bestseller: false},
+                        {name: "Kibbeh Labanieh", price: 50, description: "Kibbeh in yogurt sauce with garlic and mint", image: "/images/image_17.jpg", bestseller: false},
+                    ]
+                },
+                {
+                    id: "main-dishes",
+                    name: "Main Dishes",
+                    items: [
+                        {name: "Masgouf Fish", price: 120, description: "Traditional Iraqi grilled carp with tomatoes and onions", image: "/images/image_18.jpg", bestseller: true},
+                        {name: "Dolma", price: 55, description: "Stuffed vegetables with rice and meat", image: "/images/image_19.jpg", bestseller: true},
+                        {name: "Quzi", price: 150, description: "Slow-cooked lamb with rice, nuts, and raisins", image: "/images/image_20.jpg", bestseller: true},
+                        {name: "Biryani Iraqi", price: 65, description: "Fragrant rice with meat and Iraqi spices", image: "/images/image_21.jpg", bestseller: false},
+                        {name: "Tashreeb", price: 45, description: "Bread soaked in meat stew broth", image: "/images/image_22.jpg", bestseller: false},
+                    ]
+                },
+                {
+                    id: "clay-pot",
+                    name: "Clay Pot",
+                    items: [
+                        {name: "Clay Pot Chicken", price: 70, description: "Chicken, vegetables, and rice baked in clay pot", image: "/images/image_23.jpg", bestseller: true},
+                        {name: "Clay Pot Meat", price: 85, description: "Tender meat with vegetables in traditional clay pot", image: "/images/image_24.jpg", bestseller: false},
+                    ]
+                },
+                {
+                    id: "grills",
+                    name: "Grills",
+                    items: [
+                        {name: "Iraqi Kebab", price: 65, description: "Minced lamb with spices, grilled on charcoal", image: "/images/image_25.jpg", bestseller: true},
+                        {name: "Tikka", price: 75, description: "Marinated lamb cubes grilled to perfection", image: "/images/Tikka.jpeg", bestseller: false},
+                    ]
+                }
+            ]
+        };
+
+        // Generate Menu HTML
+        function generateMenuHTML() {
+            const container = document.getElementById('pdf-content');
+            
+            let html = `
+                <div class="pdf-header">
+                    <h1>Authentic Iraqi</h1>
+                    <p class="subtitle">Traditional Cuisine • Jeddah</p>
+                </div>
+            `;
+
+            menuData.categories.forEach(category => {
+                html += `
+                    <div class="pdf-category">
+                        <h2 class="pdf-category-title">${category.name}</h2>
+                `;
+
+                category.items.forEach(item => {
+                    const bestsellerBadge = item.bestseller ? '<span class="bestseller-badge">★ Bestseller</span>' : '';
+                    
+                    html += `
+                        <div class="pdf-item">
+                            <div class="pdf-item-info">
+                                <div class="pdf-item-name">
+                                    ${item.name}
+                                    ${bestsellerBadge}
+                                </div>
+                                <div class="pdf-item-description">${item.description}</div>
+                            </div>
+                            <div class="pdf-item-price">${item.price} SAR</div>
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
+            });
+
+            html += `
+                <div class="pdf-footer">
+                    <p> Jeddah, Saudi Arabia |  +966 XX XXX XXXX</p>
+                    <p>Authentic Iraqi Taste in the Heart of Jeddah</p>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // Generate PDF
+        function generatePDF() {
+            const element = document.getElementById('pdf-content');
+            
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: 'Iraqi-Restaurant-Menu.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { 
+                    scale: 2,
+                    useCORS: true,
+                    logging: false
+                },
+                jsPDF: { 
+                    unit: 'mm', 
+                    format: 'a4', 
+                    orientation: 'portrait'
+                }
+            };
+
+            // Show loading
+            const btn = document.querySelector('.btn-download');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span>⏳</span> Generating...';
+            btn.disabled = true;
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            });
+        }
+
+        // Initialize
+        generateMenuHTML();
+    </script>
+
+</body>
+</html>
