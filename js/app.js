@@ -5,12 +5,12 @@ const menuData = {
             id: "cold-appetizers",
             name: "Cold Appetizers",
             items: [
-                {name: "Hummus", price: 25, description: "Creamy chickpea dip with tahini, lemon, and olive oil", image: "/images/image_1.jpg", bestseller: false},
-                {name: "Hummus Bil Lahme", price: 35, description: "Hummus topped with sautéed meat and pine nuts", image: "/images/image_2.jpg", bestseller: true},
-                {name: "Mutabbal", price: 25, description: "Smoky eggplant dip with tahini and garlic", image: "/images/Mutabbal.jpeg", bestseller: false},
-                {name: "Baba Ghanoush", price: 25, description: "Grilled eggplant with tomatoes, onions, and herbs", image: "/images/image_4.jpg", bestseller: false},
-                {name: "Labneh", price: 20, description: "Strained yogurt with olive oil and za'atar", image: "/images/image_5.jpg", bestseller: false},
-                {name: "Fattoush", price: 30, description: "Levantine salad with fried bread, sumac, and pomegranate", image: "/images/image_6.jpg", bestseller: false},
+                {name: "Hummus", price: 25, description: "Creamy chickpea dip with tahini, lemon, and olive oil", image: "./images/image_1.jpg", bestseller: false},
+                {name: "Hummus Bil Lahme", price: 35, description: "Hummus topped with sautéed meat and pine nuts", image: "./images/image_2.jpg", bestseller: true},
+                {name: "Mutabbal", price: 25, description: "Smoky eggplant dip with tahini and garlic", image: "./images/Mutabbal.jpeg", bestseller: false},
+                {name: "Baba Ghanoush", price: 25, description: "Grilled eggplant with tomatoes, onions, and herbs", image: "./images/image_4.jpg", bestseller: false},
+                {name: "Labneh", price: 20, description: "Strained yogurt with olive oil and za'atar", image: "./images/image_5.jpg", bestseller: false},
+                {name: "Fattoush", price: 30, description: "Levantine salad with fried bread, sumac, and pomegranate", image: "./images/image_6.jpg", bestseller: false},
             ]
         },
         {
