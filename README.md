@@ -23,7 +23,7 @@ Responsive website for **Layali Al Iraq** restaurant, showcasing authentic Iraqi
 ## Installation
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/layali-aliraq-website.git)
+git clone https://github.com/simo-SM/layali-aliraq-website.git)
 
 ## Description
 Responsive website for **Layali Al Iraq** restaurant, showcasing authentic Iraqi cuisine in the heart of Jeddah. The site includes a home page, menu, gallery, and contact information with modern and clean design.
@@ -45,4 +45,3 @@ Responsive website for **Layali Al Iraq** restaurant, showcasing authentic Iraqi
 ## Installation
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/layali-aliraq-website.git
