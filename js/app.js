@@ -408,7 +408,7 @@ function scrollToSection(sectionId) {
 // ============================================
 function downloadMenu() {
     // Path to your PDF file
-    const pdfUrl = '/menuPDF.html';
+    const pdfUrl = './index1.html';
    
     // Create download link
     const link = document.createElement('a');
