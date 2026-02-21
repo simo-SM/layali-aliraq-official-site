@@ -1,1 +1,49 @@
-# layali-aliraq-official-site
+# Layali Al Iraq Website
+
+![Layali Al Iraq](# Layali Al Iraq Website
+
+![Layali Al Iraq](./085b6a33-4f36-46d4-ae20-fcbcb1e93da0.png)
+
+## Description
+Responsive website for **Layali Al Iraq** restaurant, showcasing authentic Iraqi cuisine in the heart of Jeddah. The site includes a home page, menu, gallery, and contact information with modern and clean design.
+
+## Features
+- Fully responsive design for desktop, tablet, and mobile.
+- Home page highlighting the restaurant's atmosphere and specialty dishes.
+- Menu section with images and detailed descriptions of dishes.
+- Gallery showcasing restaurant interior and food.
+- Contact section with location, social media, and order options.
+- "Order Now" button integrated with WhatsApp link.
+
+## Tech Stack
+- HTML5
+- CSS3 (TailwindCSS)
+- JavaScript (for interactive elements)
+- Responsive design with mobile-first approach
+
+## Installation
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/layali-aliraq-website.git)
+
+## Description
+Responsive website for **Layali Al Iraq** restaurant, showcasing authentic Iraqi cuisine in the heart of Jeddah. The site includes a home page, menu, gallery, and contact information with modern and clean design.
+
+## Features
+- Fully responsive design for desktop, tablet, and mobile.
+- Home page highlighting the restaurant's atmosphere and specialty dishes.
+- Menu section with images and detailed descriptions of dishes.
+- Gallery showcasing restaurant interior and food.
+- Contact section with location, social media, and order options.
+- "Order Now" button integrated with WhatsApp link.
+
+## Tech Stack
+- HTML5
+- CSS3 (TailwindCSS)
+- JavaScript (for interactive elements)
+- Responsive design with mobile-first approach
+
+## Installation
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/layali-aliraq-website.git
