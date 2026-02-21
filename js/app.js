@@ -17,62 +17,62 @@ const menuData = {
             id: "salads",
             name: "Salads",
             items: [
-                {name: "Iraqi Salad", price: 20, description: "Fresh vegetables with special Iraqi dressing", image: "/images/image_7.jpg", bestseller: false},
-                {name: "Tabbouleh", price: 25, description: "Parsley, bulgur, tomatoes, and mint salad", image: "/images/image_8.jpg", bestseller: false},
-                {name: "Greek Salad", price: 30, description: "Cucumber, tomatoes, feta cheese, and olives", image: "/images/image_9.jpg", bestseller: false},
+                {name: "Iraqi Salad", price: 20, description: "Fresh vegetables with special Iraqi dressing", image: "./images/image_7.jpg", bestseller: false},
+                {name: "Tabbouleh", price: 25, description: "Parsley, bulgur, tomatoes, and mint salad", image: "./images/image_8.jpg", bestseller: false},
+                {name: "Greek Salad", price: 30, description: "Cucumber, tomatoes, feta cheese, and olives", image: "./images/image_9.jpg", bestseller: false},
             ]
         },
         {
             id: "soups",
             name: "Soups",
             items: [
-                {name: "Lentil Soup", price: 20, description: "Traditional Iraqi lentil soup with spices", image: "/images/image_10.jpg", bestseller: false},
-                {name: "Chicken Soup", price: 25, description: "Hearty chicken soup with vegetables", image: "/images/image_11.jpg", bestseller: false},
+                {name: "Lentil Soup", price: 20, description: "Traditional Iraqi lentil soup with spices", image: "./images/image_10.jpg", bestseller: false},
+                {name: "Chicken Soup", price: 25, description: "Hearty chicken soup with vegetables", image: "./images/image_11.jpg", bestseller: false},
             ]
         },
         {
             id: "manageesh",
             name: "Manageesh",
             items: [
-                {name: "Za'atar", price: 15, description: "Flatbread with thyme, sesame, and olive oil", image: "/images/image_12.jpg", bestseller: false},
-                {name: "Cheese", price: 20, description: "Flatbread with Akkawi cheese", image: "/images/image_13.jpg", bestseller: false},
-                {name: "Meat", price: 25, description: "Flatbread with seasoned minced meat", image: "/images/image_14.jpg", bestseller: false},
+                {name: "Za'atar", price: 15, description: "Flatbread with thyme, sesame, and olive oil", image: "./images/image_12.jpg", bestseller: false},
+                {name: "Cheese", price: 20, description: "Flatbread with Akkawi cheese", image: "./images/image_13.jpg", bestseller: false},
+                {name: "Meat", price: 25, description: "Flatbread with seasoned minced meat", image: "./images/image_14.jpg", bestseller: false},
             ]
         },
         {
             id: "iraqi-kibbeh",
             name: "Iraqi Kibbeh",
             items: [
-                {name: "Mosul Kibbeh", price: 45, description: "Flat kibbeh stuffed with meat, onions, and almonds", image: "/images/image_15.jpg", bestseller: true},
-                {name: "Baghdad Kibbeh", price: 40, description: "Round fried kibbeh with pine nuts", image: "/images/image_16.jpg", bestseller: false},
-                {name: "Kibbeh Labanieh", price: 50, description: "Kibbeh in yogurt sauce with garlic and mint", image: "/images/image_17.jpg", bestseller: false},
+                {name: "Mosul Kibbeh", price: 45, description: "Flat kibbeh stuffed with meat, onions, and almonds", image: "./images/image_15.jpg", bestseller: true},
+                {name: "Baghdad Kibbeh", price: 40, description: "Round fried kibbeh with pine nuts", image: "./images/image_16.jpg", bestseller: false},
+                {name: "Kibbeh Labanieh", price: 50, description: "Kibbeh in yogurt sauce with garlic and mint", image: "./images/image_17.jpg", bestseller: false},
             ]
         },
         {
             id: "main-dishes",
             name: "Main Dishes",
             items: [
-                {name: "Masgouf Fish", price: 120, description: "Traditional Iraqi grilled carp with tomatoes and onions", image: "/images/image_18.jpg", bestseller: true},
-                {name: "Dolma", price: 55, description: "Stuffed vegetables with rice and meat", image: "/images/image_19.jpg", bestseller: true},
-                {name: "Quzi", price: 150, description: "Slow-cooked lamb with rice, nuts, and raisins", image: "/images/image_20.jpg", bestseller: true},
-                {name: "Biryani Iraqi", price: 65, description: "Fragrant rice with meat and Iraqi spices", image: "/images/image_21.jpg", bestseller: false},
-                {name: "Tashreeb", price: 45, description: "Bread soaked in meat stew broth", image: "/images/image_22.jpg", bestseller: false},
+                {name: "Masgouf Fish", price: 120, description: "Traditional Iraqi grilled carp with tomatoes and onions", image: "./images/image_18.jpg", bestseller: true},
+                {name: "Dolma", price: 55, description: "Stuffed vegetables with rice and meat", image: "./images/image_19.jpg", bestseller: true},
+                {name: "Quzi", price: 150, description: "Slow-cooked lamb with rice, nuts, and raisins", image: "./images/image_20.jpg", bestseller: true},
+                {name: "Biryani Iraqi", price: 65, description: "Fragrant rice with meat and Iraqi spices", image: "./images/image_21.jpg", bestseller: false},
+                {name: "Tashreeb", price: 45, description: "Bread soaked in meat stew broth", image: "./images/image_22.jpg", bestseller: false},
             ]
         },
         {
             id: "clay-pot",
             name: "Clay Pot",
             items: [
-                {name: "Clay Pot Chicken", price: 70, description: "Chicken, vegetables, and rice baked in clay pot", image: "/images/image_23.jpg", bestseller: true},
-                {name: "Clay Pot Meat", price: 85, description: "Tender meat with vegetables in traditional clay pot", image: "/images/image_24.jpg", bestseller: false},
+                {name: "Clay Pot Chicken", price: 70, description: "Chicken, vegetables, and rice baked in clay pot", image: "./images/image_23.jpg", bestseller: true},
+                {name: "Clay Pot Meat", price: 85, description: "Tender meat with vegetables in traditional clay pot", image: "./images/image_24.jpg", bestseller: false},
             ]
         },
         {
             id: "grills",
             name: "Grills",
             items: [
-                {name: "Iraqi Kebab", price: 65, description: "Minced lamb with spices, grilled on charcoal", image: "/images/image_25.jpg", bestseller: true},
-                {name: "Tikka", price: 75, description: "Marinated lamb cubes grilled to perfection", image: "/images/Tikka.jpeg", bestseller: false},
+                {name: "Iraqi Kebab", price: 65, description: "Minced lamb with spices, grilled on charcoal", image: "./images/image_25.jpg", bestseller: true},
+                {name: "Tikka", price: 75, description: "Marinated lamb cubes grilled to perfection", image: "./images/Tikka.jpeg", bestseller: false},
             ]
         }
     ]
@@ -340,10 +340,10 @@ window.addEventListener('resize', () => {
 // ============================================
 
 const heroImages = [
-    '/images/bg2.jpg',
-    '/images/bg3.jpg',
-    '/images/bg4.jpg',
-    '/images/bg5.jpeg'
+    './images/bg2.jpg',
+    './images/bg3.jpg',
+    './images/bg4.jpg',
+    './images/bg5.jpeg'
 ];
 const container = document.getElementById('slider-container');
 let currentIndex = 0;
