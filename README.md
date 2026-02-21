@@ -1,7 +1,7 @@
 # Layali Al Iraq Website
 
 ---
-![image alt](./085b6a33-4f36-46d4-ae20-fcbcb1e93da0.png)
+![image alt](images/layaliAliraqwebsite.png)
 ---
 ## Description
 Responsive website for **Layali Al Iraq** restaurant, showcasing authentic Iraqi cuisine in the heart of Jeddah. The site includes a home page, menu, gallery, and contact information with modern and clean design.
